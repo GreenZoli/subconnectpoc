@@ -1,0 +1,50 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+<h1>Welcome to this demo of <span>Web3-Onboard</span> + Vanilla JS!</h1>
+<div class="wallet hidden">
+  <div class="connected">
+    <div class="address"></div>
+    <div class="label"></div>
+  </div>
+  <button class="disconnect-button" @onclick=Sign>Sign</button>
+</div>
+<div class="disconnected">
+  <button class="connect-button" @onclick=Connect>Connect</button>
+</div>
+
+<p>
+  Connected Account: @account
+  Connected Chain: @chainId
+</p>
+
+@inject SubConnectInterop onboard;
+@code{
+  protected override async Task OnInitializedAsync()
+  {
+    onboard.StateChangedEvent += ChangeAccount;
+  }
+
+  string account = "";
+  string chainId = "";
+  public async Task Connect ()
+  {
+    await onboard.Connect();
+  }
+
+
+  public async Task Sign()
+  {
+    var signed = await onboard.GetSignature("asd");
+    Console.WriteLine(signed);
+  }
+
+  public async Task ChangeAccount(SubConnectState state)
+  {
+    chainId = state?.ChainId;
+    account = state?.Address;
+
+    StateHasChanged();
+
+  }
+}

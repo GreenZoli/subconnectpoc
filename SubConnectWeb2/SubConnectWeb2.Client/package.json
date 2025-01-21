@@ -1,0 +1,21 @@
+{
+  "name": "subconnectweb2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "webpack ./src/index.js --output-path ./wwwroot/js --output-filename index.bundle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@web3-onboard/core": "^2.24.0",
+    "@web3-onboard/injected-wallets": "^2.11.3"
+  }
+}
